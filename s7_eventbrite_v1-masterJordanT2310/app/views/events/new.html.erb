@@ -1,0 +1,63 @@
+<% if @event.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br><br><br>
+
+      <%= form_for @event, html: { class: "form-signin mt-3" } do |f| %>
+      <h1 class="h3 mb-5 font-weight-normal text-center">Edition des informations</h1>
+
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= f.label :start_date, "Date" %><br />
+            <%= f.datetime_field :start_date, autofocus: true, autocomplete: "start_date", class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :duration, "Durée (en multiple de 5 mins)" %><br />
+            <%= f.text_field :duration, autocomplete: "duration", class: "form-control" %>
+          </div>
+        </div>
+
+      <div class="form-group ">
+        <%= f.label :title, "Titre" %><br />
+        <%= f.text_field :title, autocomplete: "title", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, "Description" %><br />
+        <%= f.text_area :description, autocomplete: "description", class: "form-control" %>
+      </div>
+
+      <div class="form-row mb-5">
+          <div class="form-group col-md-6">
+            <%= f.label :price, "Prix" %><br />
+            <%= f.text_field :price, autocomplete: "price", class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :location, "Localisation" %><br />
+            <%= f.text_field :location, autocomplete: "location", class: "form-control" %>
+          </div>
+        </div>
+
+      <div class="actions">
+        <%= f.submit "Créer l'évènement", class: "btn btn-lg btn-primary btn-block" %>
+      </div>
+
+      <% end %>
+
+      <div class="mb-5 mt-3">
+        <%= link_to 'Liste des événements', root_path %>
+      </div>
+
+    </div>
+  </div>
+</div>

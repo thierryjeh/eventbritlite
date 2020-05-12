@@ -1,0 +1,42 @@
+<% if flash[:danger] %>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:danger] %>
+  </div>
+<% end %>
+
+<% flash[:danger] = nil %>
+
+<div class="jumbotron jumbotron-fluid pt-3 pb-4" >
+  <h1 class="display-4 ml-3 mb-4">Hello ! Voici la page d'accueil d'Eventbrite !</h1>
+  <p class="lead ml-3 my-4">Tu pourras y retrouver tout plein d'évènements trop cool. Régale-toi, grand garçon.</p>
+</div>
+
+<div class="jumbotron jumbotron-fluid bg-white pt-3 pb-4 d-flex flex-column align-items-center" >
+  <p class="lead ml-3 my-4">Tu veux créer un évènement ? Clique sur le boutton ci-dessous.</p>
+  <p><%= link_to "Créer un évènement", new_event_path, :type => "button",  :class => 'btn btn-primary ml-3' %></p>
+</div>
+
+<div class="d-flex flex-wrap justify-content-around">
+  <% Event.all.each do |event|%>
+
+  <div class="card col-8 col-sm-5 col-lg-4 px-0 mx-2 my-4" style="max-width: 400px; box-shadow: 0px 0px 5px grey;">
+    <div class="card-body">
+      <h5 class="card-title" style="min-height: 50px;""><%= event.title %></h5>
+      <h6 class="card-subtitle text-muted mb-2">Évènement n°<%= Event.all.index(event) + 1 %></h6>
+      <p class="card-text"><%= event.description %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Date : <%= event.start_date.strftime("%d/%m/%Y, %H:%M") %></li>
+      <li class="list-group-item">Durée : <%= event.duration %> mins</li>
+      <li class="list-group-item">Prix : <%= event.price %> €</li>
+      <li class="list-group-item">Localisation : <%= event.location %> </li>
+    </ul>
+    <div class="d-flex justify-content-start py-3 pl-3">
+      <div class="btn-group">
+        <%= link_to 'Afficher', event_path(event), :class => "card-link btn btn-sm btn-outline-success" %>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+</div>
